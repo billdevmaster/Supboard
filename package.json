@@ -1,13 +1,9 @@
 {
-    "name": "react-datta-able-dashboard",
-    "version": "0.0.2",
+    "name": "supboard-app",
+    "version": "0.0.1",
     "private": true,
-    "build": {
-        "yarn": "v14.0.0,v16.0.0",
-        "npm": "v16.0.0"
-    },
     "engines": {
-        "node": "16.x"
+        "node": "14.x"
     },
     "dependencies": {
         "@amcharts/amcharts3-react": "^3.1.0",
