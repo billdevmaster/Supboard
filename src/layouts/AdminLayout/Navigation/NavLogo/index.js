@@ -19,9 +19,9 @@ const NavLogo = () => {
             <div className="navbar-brand header-logo">
                 <Link to="#" className="b-brand">
                     <div className="b-bg">
-                        <i className="feather icon-trending-up" />
+                        <i className="feather icon-anchor" />
                     </div>
-                    <span className="b-title">Datta Able</span>
+                    <span className="b-title">Suprent</span>
                 </Link>
                 <Link
                     to="#"

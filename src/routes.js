@@ -57,6 +57,72 @@ const routes = [
                 path: '/app/dashboard/default',
                 component: lazy(() => import('./views/dashboard/DashDefault'))
             },
+            {
+                exact: true,
+                path: '/location',
+                component: lazy(() => import('./views/location'))
+            },
+            {
+                exact: true,
+                path: '/locker',
+                component: lazy(() => import('./views/locker'))
+            },
+            {
+                exact: true,
+                path: '/booking',
+                component: lazy(() => import('./views/booking'))
+            },
+            {
+                exact: true,
+                path: '/requests',
+                component: lazy(() => import('./views/requests'))
+            },
+            {
+                exact: true,
+                path: '/instructions',
+                component: lazy(() => import('./views/instructions'))
+            },
+            {
+                exact: true,
+                path: '/liability-waiver',
+                component: lazy(() => import('./views/liability-waiver'))
+            },
+            {
+                exact: true,
+                path: '/event',
+                component: lazy(() => import('./views/event'))
+            },
+            {
+                exact: true,
+                path: '/customer',
+                component: lazy(() => import('./views/customer'))
+            },
+            {
+                exact: true,
+                path: '/equipment',
+                component: lazy(() => import('./views/equipment'))
+            },
+            {
+                exact: true,
+                path: '/settings/price',
+                component: lazy(() => import('./views/settings/price'))
+            },
+            {
+                exact: true,
+                path: '/settings/station',
+                component: lazy(() => import('./views/settings/station'))
+            },
+            {
+                exact: true,
+                path: '/settings/terrain',
+                component: lazy(() => import('./views/settings/terrain'))
+            },
+            {
+                exact: true,
+                path: '/settings/review',
+                component: lazy(() => import('./views/settings/review'))
+            },
+
 
             {
                 exact: true,

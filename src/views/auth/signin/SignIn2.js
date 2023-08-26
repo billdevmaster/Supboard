@@ -18,18 +18,13 @@ const Signin1 = () => {
                         <span className="r s" />
                         <span className="r" />
                     </div>
+                    
                     <Card className="borderless text-center">
                         <Card.Body>
                             <div className="mb-4">
                                 <i className="feather icon-unlock auth-icon" />
                             </div>
                             <RestLogin />
-                            <p className="mb-2 text-muted">
-                                Forgot password?
-                                <NavLink to="/auth/reset-password-1" className="f-w-400">
-                                    Reset
-                                </NavLink>
-                            </p>
                             <p className="mb-0 text-muted">
                                 Don’t have an account?
                                 <NavLink to="/auth/signup" className="f-w-400">

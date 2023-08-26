@@ -102,13 +102,6 @@ const RestLogin = ({ className, ...rest }) => {
                             </Col>
                         )}
 
-                        <div className="custom-control custom-checkbox  text-left mb-4 mt-2">
-                            <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                            <label className="custom-control-label" htmlFor="customCheck1">
-                                Save credentials.
-                            </label>
-                        </div>
-
                         <Row>
                             <Col mt={2}>
                                 <Button
