@@ -4,7 +4,7 @@
 
 .custom-select,
 .form-control {
-    background: $theme-background;
+    background: white;
     padding: 10px 20px;
     font-size: 14px;
     height: auto;
@@ -23,7 +23,7 @@
     }
 
     &:focus {
-        background: $theme-background;
+        background: white;
     }
 
     &::-moz-placeholder {
@@ -42,7 +42,7 @@
 /* input group start */
 
 .input-group {
-    background: $theme-background;
+    background: white;
 
     .input-group-text {
         padding-left: 15px;

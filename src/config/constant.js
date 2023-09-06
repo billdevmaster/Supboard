@@ -5,10 +5,18 @@ if (process.env.REACT_APP_BACKEND_SERVER) {
   BACKEND_SERVER = "http://localhost:5000/api/";
 }
 
+let BACKEND_ASSET = null;
+if (process.env.REACT_APP_BACKEND_ASSET) {
+  BACKEND_ASSET = process.env.REACT_APP_BACKEND_ASSET;
+} else {
+  BACKEND_ASSET = "http://localhost:5000/";
+}
+
 export const BASENAME = ''; // don't add '/' at end off BASENAME
 export const BASE_URL = '/app/dashboard/default';
 export const BASE_TITLE = ' | Suprent ';
 export const API_SERVER = BACKEND_SERVER;
+export const ASSET_SERVER = BACKEND_ASSET;
 
 export const CONFIG = {
     layout: 'vertical', // disable on free version

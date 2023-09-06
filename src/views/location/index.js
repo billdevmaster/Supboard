@@ -1,29 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Table, Button, Form, InputGroup, Row, Col } from 'react-bootstrap';
+import { Card, Button, Form, InputGroup, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Pagination from '@vlsergey/react-bootstrap-pagination';
+
+import DataTable from './table';
+import { API_SERVER } from './../../config/constant';
 
 const Location = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [length, setLength] = useState(10);
+  const [keyword, setKeyword] = useState("");
   const [data, setData] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
+  const flipRefresh = () => {
+    setRefresh(!refresh);
+  }
 
   useEffect(() => {
     getData();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, length, keyword, refresh])
 
   const getData = async () => {
-    setData([
-      {
-        name: "test",
-        address: "test",
-        phone: "test Phone",
-        email: "test@test.com",
-        time: "12:00 - 04:20",
-        price: "test price",
-        liabilityWaiver: "test liability",
-        stationName: "test Stating",
-        sla: "No",
-        status: "Active",
-        createdAt: "2023/08/26",
+    try {
+      const res = await axios.post(API_SERVER + "location/getList", { currentPage, length, keyword });
+      const tmpData = [];
+      for (let i = 0; i < res.data.data.length; i++) {
+        const tmpItem = { ...res.data.data[i] };
+        tmpItem.time = tmpItem.openTime + " - " + tmpItem.closeTime;
+        tmpItem.price = tmpItem.price.name;
+        if (tmpItem.stationType === "operatorOwned") {
+          tmpItem.stationName = "Owner Operator";
+        } else {
+          tmpItem.stationName = "Suprent Operator";
+        }
+        tmpData.push(tmpItem);
       }
-    ])
+      setData(tmpData);
+      setTotalPage(res.data.totalPage);
+    } catch (e) {
+      console.log(e)
+      toast.error("Server Error");
+    }
+  }
+
+  const handlePageChange = async ( {target: {name, value }} ) => {
+    setCurrentPage(value);
   }
 
   return (
@@ -36,10 +62,10 @@ const Location = () => {
                   <InputGroup>
                       
                     <Form.Control
-                        type="text"
-                        placeholder="Username"
-                        aria-describedby="inputGroupPrepend"
-                        required
+                      type="text"
+                      placeholder="Username"
+                      value={keyword}
+                      onChange={(e) => setKeyword(e.target.value)}
                     />
                     <InputGroup.Prepend>
                       <InputGroup.Text id="inputGroupPrepend">
@@ -51,59 +77,23 @@ const Location = () => {
               </Form.Group>
             </Col>
             <Col md="8">
-              <Button className='float-right text-capitalize'>Add</Button>
-
+              <NavLink to='/location/edit/0'>
+                <Button className='float-right text-capitalize'>ADD</Button>
+              </NavLink>
             </Col>
           </Row>
         </Card.Header>
         <Card.Body>
-            <Table responsive hover>
-                <thead className="table-info">
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>PhoneNumer</th>
-                        <th>Email Id</th>
-                        <th>Time</th>
-                        <th>Price</th>
-                        <th>Liability Waiver</th>
-                        <th>Station Owner Name-Type</th>
-                        <th>SLA?</th>
-                        <th>Status</th>
-                        <th>Created Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {data.map((item, index) => {
-                    return (
-                      <tr key={index}>
-                        <th scope="row">1</th>
-                        <td>{item.name}</td>
-                        <td>{item.address}</td>
-                        <td>{item.phone}</td>
-                        <td>{item.email}</td>
-                        <td>{item.time}</td>
-                        <td>{item.price}</td>
-                        <td>{item.liabilityWaiver}</td>
-                        <td>{item.stationName}</td>
-                        <td>{item.sla}</td>
-                        <td>{item.status}</td>
-                        <td>{item.createdAt}</td>
-                        <td>
-                          <Button variant={'outline-success'} className="btn-icon">
-                            <i className="feather icon-edit-2" />
-                          </Button>
-                          <Button variant={'outline-danger'} className="btn-icon">
-                            <i className="feather icon-trash-2" />
-                          </Button>
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-            </Table>
+          <DataTable data={data} flipRefresh={flipRefresh} />
+          <Col md={12} style={{ marginTop: 5, display: 'flex', justifyContent: 'center' }}>
+            <Pagination value={currentPage} totalPages={totalPage} onChange={handlePageChange} style={{ flexWrap: "wrap" }} />
+            <select as="select" className="mb-3 ml-4" onChange={(e) => setLength(parseInt(e.target.value))}>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+            </select>
+          </Col>
         </Card.Body>
     </Card>
     </>

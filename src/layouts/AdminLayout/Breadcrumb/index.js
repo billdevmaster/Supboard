@@ -50,7 +50,7 @@ const Breadcrumb = () => {
         title = item.title;
         itemContent = (
             <ListGroup.Item as="li" bsPrefix=" " className="breadcrumb-item">
-                <Link to="#">{title}</Link>
+                <Link to={item.url}>{title}</Link>
             </ListGroup.Item>
         );
 

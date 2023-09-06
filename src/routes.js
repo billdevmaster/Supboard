@@ -54,13 +54,18 @@ const routes = [
         routes: [
             {
                 exact: true,
-                path: '/app/dashboard/default',
+                path: '/dashboard',
                 component: lazy(() => import('./views/dashboard/DashDefault'))
             },
             {
                 exact: true,
                 path: '/location',
                 component: lazy(() => import('./views/location'))
+            },
+            {
+                exact: true,
+                path: '/location/edit/:id',
+                component: lazy(() => import('./views/location/edit'))
             },
             {
                 exact: true,
@@ -109,6 +114,11 @@ const routes = [
             },
             {
                 exact: true,
+                path: '/settings/price/edit/:id',
+                component: lazy(() => import('./views/settings/price/edit'))
+            },
+            {
+                exact: true,
                 path: '/settings/station',
                 component: lazy(() => import('./views/settings/station'))
             },
@@ -116,6 +126,11 @@ const routes = [
                 exact: true,
                 path: '/settings/terrain',
                 component: lazy(() => import('./views/settings/terrain'))
+            },
+            {
+                exact: true,
+                path: '/settings/terrain/edit/:id',
+                component: lazy(() => import('./views/settings/terrain/edit'))
             },
             {
                 exact: true,

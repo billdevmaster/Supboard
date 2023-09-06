@@ -329,6 +329,9 @@ td {
 .table th,
 .table td {
     vertical-align: middle;
+    &.wrap {
+        white-space: pre-wrap;
+    }
 }
 .cover-img-block {
     overflow: hidden;
@@ -400,3 +403,8 @@ td {
         }
     }
 }
+
+.text-red {
+    color: red;
+}
+
