@@ -74,6 +74,11 @@ const routes = [
             },
             {
                 exact: true,
+                path: '/locker/edit/:id',
+                component: lazy(() => import('./views/locker/edit'))
+            },
+            {
+                exact: true,
                 path: '/booking',
                 component: lazy(() => import('./views/booking'))
             },
@@ -121,6 +126,11 @@ const routes = [
                 exact: true,
                 path: '/settings/station',
                 component: lazy(() => import('./views/settings/station'))
+            },
+            {
+                exact: true,
+                path: '/settings/station/edit/:id',
+                component: lazy(() => import('./views/settings/station/edit'))
             },
             {
                 exact: true,

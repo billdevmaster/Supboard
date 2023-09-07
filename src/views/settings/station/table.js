@@ -2,11 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import { confirmAlert } from "react-confirm-alert";
-import axios from 'axios';
 import { toast } from 'react-toastify';
-
-import { API_SERVER } from './../../config/constant';
-import { formatDate } from '../../utils/utils';
+import axios from 'axios';
+import { API_SERVER } from './../../../config/constant';
 
 const DataTable = ({ data, flipRefresh }) => {
 
@@ -19,7 +17,7 @@ const DataTable = ({ data, flipRefresh }) => {
           label: "Yes",
           onClick: async () => {
             try {
-              await axios.post(API_SERVER + "location/deleteItem", { id });
+              await axios.post(API_SERVER + "settings/station/deleteItem", { id });
               toast.success("Successfully deleted");
               flipRefresh();
             } catch (e) {
@@ -42,13 +40,9 @@ const DataTable = ({ data, flipRefresh }) => {
           <thead className="table-info">
               <tr>
                   <th>Name</th>
-                  <th className='wrap w-25'>Address</th>
-                  <th>PhoneNumer</th>
-                  <th>Email Id</th>
-                  <th>Time</th>
-                  <th>Price</th>
+                  <th>UUID</th>
+                  <th>Location</th>
                   <th>Status</th>
-                  <th>Station Owner Name-Type</th>
                   <th>Created Date</th>
                   <th>Action</th>
               </tr>
@@ -58,16 +52,12 @@ const DataTable = ({ data, flipRefresh }) => {
               return (
                 <tr key={index}>
                   <td>{item.name}</td>
-                  <td className='wrap'>{item.address}</td>
-                  <td>{item.phone}</td>
-                  <td>{item.email}</td>
-                  <td>{item.time}</td>
-                  <td>{item.price}</td>
+                  <td>{item.uuid}</td>
+                  <td>{item.location.name}</td>
                   <td>{item.status}</td>
-                  <td>{item.stationName}</td>
-                  <td>{formatDate(item.createdAt)}</td>
+                  <td>{item.createdAt}</td>
                   <td>
-                    <NavLink to={`/location/edit/${item._id}`}>
+                    <NavLink to={`/settings/station/edit/${item._id}`}>
                       <Button variant={'outline-success'} className="btn-icon">
                         <i className="feather icon-edit-2" />
                       </Button>

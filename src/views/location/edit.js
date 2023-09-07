@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 const Edit = () => {
   const { id } = useParams();
   const [data, setData] = useState({
+    status: "Active",
     name: "",
     email: "",
     phone: "",
@@ -76,13 +77,18 @@ const Edit = () => {
       }
     }
     getPriceList();
-    if (id !== 0) {
+    if (id !== "0") {
       getData();
-    } else {
+    } 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  useEffect(() => {
+    if (id === "0" && priceList.length > 0) {
       setData({ ...data, priceId: priceList[0] });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [priceList]);
 
   const handleSubmit = async () => {
     if (data.name === "" || data.phone === "" || data.email === "" || data.openTime === "" || data.closeTime === "" || data.address === "" || data.priceId === "") {
@@ -90,6 +96,7 @@ const Edit = () => {
     }
 
     const formData = new FormData();
+    formData.append("status", data.status);
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("phone", data.phone);
@@ -177,6 +184,16 @@ const Edit = () => {
                   <Row>
                     <Col md={6}>
                       <Form.Group>
+                        <Form.Label>Status <span className='text-red'>*</span></Form.Label>
+                        <Form.Control as="select" onChange={(e) => setData({...data, status: e.target.value})} value={data.status}>
+                          <option value="Active">Active</option>
+                          <option value="WIP">WIP</option>
+                        </Form.Control>
+                      </Form.Group>
+                    </Col>
+                    
+                    <Col md={6}>
+                      <Form.Group>
                         <Form.Label>Name <span className='text-red'>*</span></Form.Label>
                         <Form.Control type="text" placeholder="name" value={data.name} onChange={(e) => setData({...data, name: e.target.value})}/>
                       </Form.Group>
@@ -193,7 +210,6 @@ const Edit = () => {
                         <Form.Control type="email" placeholder="email" value={data.email} onChange={(e) => setData({...data, email: e.target.value})}/>
                       </Form.Group>
                     </Col>
-                    <Col md={6}></Col>
                     <Col md={6}>
                       <Form.Group>
                         <Form.Label>Open Time <span className='text-red'>*</span></Form.Label>
